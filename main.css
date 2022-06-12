@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,500;0,800;1,400&display=swap');
+
+:root {
+    --header-height: 80px;
+    --background: #262b36;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Mulish', sans-serif;
+    font-weight: 400;
+    background-color: #1c1e26;
+}
+
+header {
+    width: 100%;
+    min-height: var(--header-height);
+    text-align: center;
+    background-color: var(--background);
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .logo {
+    font-size: 24px;
+    color: #5c61ed;
+}
+
+header .nav-toggle {
+    display: none;
+}
+
+header .nav-toggle-label {
+    height: 21px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 30px;
+    display: flex;
+    align-items: center;
+}
+
+header .nav-toggle-label span {
+    width: 26px;
+    height: 3px;
+    background-color: #aaaaaf;
+    display: block;
+    position: relative;
+}
+
+header .nav-toggle-label span:first-child,
+header .nav-toggle-label span:last-child {
+    content: '';
+    position: absolute;
+}
+
+header .nav-toggle-label span:first-child {
+    bottom: 0;
+    transform-origin: bottom;
+    transition: all .3s ease-in-out;
+}
+
+header .nav-toggle-label span:last-child {
+    top: 0;
+    transform-origin: bottom;
+    transition: all .3s ease-in-out;
+}
+
+header nav {
+    width: 100%;
+    text-align: left;
+    background-color: var(--background);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform .4s ease-in-out;
+}
+
+header nav ul {
+    list-style: none;
+}
+
+header nav ul li {
+    margin: 0 0 1em 30px;
+}
+
+header nav ul li a {
+    color: #aaaaaf;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity .15s ease-in-out;
+}
+
+header nav ul li a:hover {
+    color: #70c0af;
+}
+
+header .nav-toggle:checked ~ .nav-toggle-label span:first-child {
+    bottom: 9px;
+    transform: rotate(45deg);
+}
+
+header .nav-toggle:checked ~ .nav-toggle-label span:last-child {
+    top: 9px;
+    transform: rotate(-45deg);
+}
+
+header .nav-toggle:checked ~ .nav-toggle-label span:nth-of-type(2) {
+    width: 150%;
+    opacity: 0;
+}
+
+header .nav-toggle:checked ~ nav {
+    transform: scale(1, 1);
+}
+
+header .nav-toggle:checked ~ nav a {
+    opacity: 1;
+    transition: opacity .25s ease-in-out .25s;
+}
+
+.content {
+    height: calc(100vh - var(--header-height));
+    padding: calc(var(--header-height) + 50px) 25px 25px;
+    color: #f4f4f4;
+}
+
+@media screen and (min-width: 992px) {
+    header .nav-toggle-label {
+        display: none;
+    }
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr 91px minmax(900px, 1fr) 1fr;
+    }
+
+    header .logo {
+        grid-column: 2 / 3;
+        display: flex;
+        align-items: center;
+    }
+
+    header nav {
+        all: unset;
+        grid-column: 3 /4;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    header nav ul {
+        display: flex;
+    }
+
+    header nav ul li {
+        margin: 0 0 0 3em;
+    }
+
+    header nav ul li a {
+        opacity: 1;
+    }
+}
